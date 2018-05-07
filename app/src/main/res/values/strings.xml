@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Cashcollect</string>
+    <string-array name="india_states">
+        <item>Chennai</item>
+        <item>Coimbatore</item>
+        <item>Madurai</item>
+        <item>Tiruchirappalli</item>
+        <item>Salem</item>
+        <item>Tirunelveli</item>
+        <item>Ambattur</item>
+        <item>Tiruppur</item>
+        <item>Avadi</item>
+        <item>Tiruvottiyur</item>
+        <item>Thoothukkudi</item>
+        <item>Nagercoil</item>
+        <item>Thanjavur</item>
+        <item>Pallavaram</item>
+        <item>Dindigul</item>
+        <item>Vellore</item>
+        <item>Tambaram</item>
+        <item>Cuddalore</item>
+        <item>Alandur</item>
+        <item>Kancheepuram</item>
+        <item>Erode</item>
+        <item>Tiruvannamalai</item>
+        <item>Kumbakonam</item>
+        <item>Rajapalayam</item>
+        <item>Kurichi</item>
+        <item>Madavaram</item>
+        <item>Pudukkottai</item>
+        <item>Hosur</item>
+        <item>Ambur</item>
+        <item>Karaikkudi</item>
+        <item>Nagapattinam</item>
+        <item>Velankanni</item>
+    </string-array>
+</resources>

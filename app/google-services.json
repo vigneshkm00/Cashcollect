@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "137764362861",
+    "firebase_url": "https://cashcollection-ed137.firebaseio.com",
+    "project_id": "cashcollection-ed137",
+    "storage_bucket": "cashcollection-ed137.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137764362861:android:faf7fa53709787fe",
+        "android_client_info": {
+          "package_name": "com.example.nivetha_zuch508.cashcollect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137764362861-2timtdt2akivm8umv79fkgflnmo581bd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nivetha_zuch508.cashcollect",
+            "certificate_hash": "e0b62f0541d3fbde6bdecdd29615f932b7b100b4"
+          }
+        },
+        {
+          "client_id": "137764362861-bqvb5uhl42h9rekloqimglu6ofrbuu8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMq6AEF1UUgTKzbN-MF0fdUQIVA5H7dlw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137764362861-bqvb5uhl42h9rekloqimglu6ofrbuu8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
