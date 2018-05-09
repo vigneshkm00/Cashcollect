@@ -119,6 +119,8 @@ public class updatecash extends AppCompatActivity {
             // String id = databaseArtists.push().getKey();
 
             //creating an Artist Object
+          Long tsLong = System.currentTimeMillis()/1000;
+          String ts = tsLong.toString();
             Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
@@ -126,10 +128,11 @@ public class updatecash extends AppCompatActivity {
             String year1= Integer.toString(year);
            // String month1= Integer.toString(month);
             String month1 =c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-            billupdate artist = new billupdate(mobno,amount1,year1,status,paid,month1);
+            billupdate artist = new billupdate(mobno,amount1,year1,status,paid,month1,ts);
             databaseref = FirebaseDatabase.getInstance().getReference("customer_bill").child(mobno);
             //Saving the Artist
-            databaseref.child(year1).child(month1).setValue(artist);
+         String tim = ts+month1;
+            databaseref.child(year1).child(tim).setValue(artist);
 
             //setting edittext to blank again
 

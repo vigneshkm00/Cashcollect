@@ -13,10 +13,15 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class Amount extends AppCompatActivity {
     EditText amn;
     Button btn;
-    String amount,paid,key,status,month,year;
+    String amount,paid,key,status,month,year,ts,amn1;
     DatabaseReference databaseref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +35,14 @@ public class Amount extends AppCompatActivity {
         status = getIntent().getStringExtra("status");
         month = getIntent().getStringExtra("month");
         year = getIntent().getStringExtra("year");
+        ts = getIntent().getStringExtra("timest");
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(amn.getText().toString())) {
 
-                String amn1 = amn.getText().toString();
+              amn1 = amn.getText().toString();
                 int a1 = Integer.parseInt(amn1);
                 int p1 = Integer.parseInt(paid);
                 int x = a1 + p1;
@@ -48,11 +55,12 @@ public class Amount extends AppCompatActivity {
                     if (paid1.equals(amount)) {
                         status = "Paid";
                     }
-                    billupdate artist = new billupdate(key, amount, year, status, paid1, month);
+                    billupdate artist = new billupdate(key, amount, year, status, paid1, month,ts);
                     databaseref = FirebaseDatabase.getInstance().getReference("customer_bill");
-                    databaseref.child(key).child(year).child(month).setValue(artist);
+                    databaseref.child(key).child(year).child(ts+month).setValue(artist);
                     Toast.makeText(getApplicationContext(), "Paid", Toast.LENGTH_LONG).show();
                     Intent j = new Intent(Amount.this, bill_list.class);
+                   // sendSms();
                     setResult(1, j);
                     finish();
                 }
@@ -65,6 +73,35 @@ public class Amount extends AppCompatActivity {
 
             }
         });
+    }
+    public String sendSms() {
+        try {
+            // Construct data
+            String apiKey = "apikey=" + "M75sYdRhU+o-veY4GL4RXoXTyrjyhwao6OQ6Ut6O26";
+            String message = "&message=" + "The Bill Amount for Customer ID:"+key+"is Rs."+amount+".paid:"+amn1+" Status:"+status+".";
+            String sender = "&sender=" + "vignesh";
+            String numbers = "&numbers=" + "91"+key;
+
+            // Send data
+            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.txtlocal.com/send/?").openConnection();
+            String data = apiKey + numbers + message + sender;
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+            conn.getOutputStream().write(data.getBytes("UTF-8"));
+            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            final StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                stringBuffer.append(line);
+            }
+            rd.close();
+
+            return stringBuffer.toString();
+        } catch (Exception e) {
+            System.out.println("Error SMS "+e);
+            return "Error "+e;
+        }
     }
 
 }

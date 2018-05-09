@@ -6,6 +6,7 @@ import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -47,21 +49,24 @@ List<billupdate>billupdateList;
             @Override
             public void onClick(View v) {
                 key = ed.getText().toString();
+                if (!TextUtils.isEmpty(key)) {
+                     Toast.makeText(getApplicationContext(),"Search Result",Toast.LENGTH_LONG).show();
 
-                flag = 0;
+                    flag = 0;
                 databaseReference = FirebaseDatabase.getInstance().getReference("customer_bill").child(key);
+                    Query myTopPostsQuery = databaseReference.orderByChild("timestamp");
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                    myTopPostsQuery.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         billupdateList.clear();
-                        for (DataSnapshot billSnapshot1: dataSnapshot.getChildren()) {
+                        for (DataSnapshot billSnapshot1 : dataSnapshot.getChildren()) {
                             for (DataSnapshot billSnapshot : billSnapshot1.getChildren()) {
                                 billupdate bill_update = billSnapshot.getValue(billupdate.class);
                                 billupdateList.add(bill_update);
                                 String mon = bill_update.getMonth().toString();
                                 flag = 1;
-                             //   Toast.makeText(getApplicationContext(),"data"+mon,Toast.LENGTH_LONG).show();
+                                //   Toast.makeText(getApplicationContext(),"data"+mon,Toast.LENGTH_LONG).show();
                             }
                             bill_list adapter = new bill_list(MainActivity.this, billupdateList);
 
@@ -69,19 +74,17 @@ List<billupdate>billupdateList;
 
 
                         }
-                        if(flag==1)
-                        {
+                        if (flag == 1) {
                             setVisi();
-
                         }
-                        if(flag==0)
-                        {   t6 =(TextView) findViewById(R.id.nocus);
-                            ca1 =(CardView) findViewById(R.id.titlecard);
+                        if (flag == 0) {
+                            t6 = (TextView) findViewById(R.id.nocus);
+                            ca1 = (CardView) findViewById(R.id.titlecard);
                             ca2 = (CardView) findViewById(R.id.datacard);
                             t6.setVisibility(View.VISIBLE);
                             ca1.setVisibility(View.INVISIBLE);
                             ca2.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(),"No Customer Found",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "No Customer Found", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -93,6 +96,9 @@ List<billupdate>billupdateList;
 
                     }
                 });
+            }
+            else
+                Toast.makeText(getApplicationContext(),"please enter the Customer ID",Toast.LENGTH_LONG).show();
 
                 }
         });

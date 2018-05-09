@@ -56,6 +56,7 @@ public class bill_list extends ArrayAdapter<billupdate> {
                 i.putExtra("paid",bill_up.getPaid().toString());
                 i.putExtra("status",bill_up.getStatus().toString());
                 i.putExtra("id",bill_up.getId().toString());
+                i.putExtra("timest",bill_up.getTimestamp().toString());
                 context.startActivityForResult(i,1);
                // Toast.makeText(getContext(),"data"+bill_up.getAmount(),Toast.LENGTH_LONG).show();
             }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:padding="4dp"
+    android:background="?android:attr/colorBackground"
+    android:padding="6dp"
     tools:context=".MainActivity">
 
     <android.support.v7.widget.CardView
@@ -54,15 +54,15 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="201dp"
+                android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@android:color/holo_red_light"
+                android:background="@drawable/button_bg"
                 android:text="Search"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -75,25 +75,25 @@
     <android.support.v7.widget.CardView
         android:id="@+id/titlecard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@android:drawable/spinner_background"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
         android:orientation="vertical"
         android:visibility="invisible"
-        app:cardBackgroundColor="@android:color/holo_orange_light"
+        app:cardBackgroundColor="#08e3ee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/mth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginStart="4dp"
                 android:text="Month"
@@ -106,7 +106,7 @@
             <TextView
                 android:id="@+id/yer"
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="18dp"
                 android:text="Year"
@@ -119,7 +119,7 @@
             <TextView
                 android:id="@+id/amn"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="7dp"
                 android:text="Amount"
@@ -132,7 +132,7 @@
             <TextView
                 android:id="@+id/pa"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:text="Paid"
@@ -145,7 +145,7 @@
             <TextView
                 android:id="@+id/sta"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
                 android:layout_marginStart="10dp"
                 android:text="Status"
@@ -164,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:visibility="invisible"
-        app:cardBackgroundColor="#f9d48c"
+        app:cardBackgroundColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@+id/titlecard"
         tools:layout_editor_absoluteX="4dp">
 

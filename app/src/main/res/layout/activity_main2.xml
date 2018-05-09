@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:padding="8dp"
     tools:context=".Main2Activity">
 
@@ -13,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="2dp"
-        android:background="@android:color/holo_red_light"
+        android:background="@drawable/button_bg"
         android:text="add"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,18 +113,22 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="49dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
+                android:background="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editText7"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
                 app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
             <EditText
                 android:id="@+id/editText7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="295dp"
+                android:layout_height="48dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
