@@ -1,6 +1,8 @@
 package com.example.nivetha_zuch508.cashcollect;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +55,9 @@ List<billupdate>billupdateList;
                      Toast.makeText(getApplicationContext(),"Search Result",Toast.LENGTH_LONG).show();
 
                     flag = 0;
-                databaseReference = FirebaseDatabase.getInstance().getReference("customer_bill").child(key);
+                    SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                    String admin = sharedPreferences.getString("acc_id","");
+                databaseReference = FirebaseDatabase.getInstance().getReference(admin).child("customer_bill").child(key);
                     Query myTopPostsQuery = databaseReference.orderByChild("timestamp");
 
                     myTopPostsQuery.addValueEventListener(new ValueEventListener() {

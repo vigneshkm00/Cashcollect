@@ -1,6 +1,8 @@
 package com.example.nivetha_zuch508.cashcollect;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -56,7 +58,9 @@ public class Amount extends AppCompatActivity {
                         status = "Paid";
                     }
                     billupdate artist = new billupdate(key, amount, year, status, paid1, month,ts);
-                    databaseref = FirebaseDatabase.getInstance().getReference("customer_bill");
+                    SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                    String admin = sharedPreferences.getString("acc_id","");
+                    databaseref = FirebaseDatabase.getInstance().getReference(admin).child("customer_bill");
                     databaseref.child(key).child(year).child(ts+month).setValue(artist);
                     Toast.makeText(getApplicationContext(), "Paid", Toast.LENGTH_LONG).show();
                     Intent j = new Intent(Amount.this, bill_list.class);

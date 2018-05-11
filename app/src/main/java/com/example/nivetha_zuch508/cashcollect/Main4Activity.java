@@ -1,5 +1,7 @@
 package com.example.nivetha_zuch508.cashcollect;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +28,15 @@ public class Main4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
         Button b5 = (Button) findViewById(R.id.custdet);
+
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customer_details");
+                SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                String admin = sharedPreferences.getString("acc_id","");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(admin).child("customer_details");
                 data.add(new String[]{"Name","mob_no","address","state","city","dob"});
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -65,7 +71,9 @@ public class Main4Activity extends AppCompatActivity {
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("customer_bill");
+                SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                String admin = sharedPreferences.getString("acc_id","");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(admin).child("customer_bill");
                 data.add(new String[]{"Mobile_No","Month","Year","Amount","Paid","Status"});
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -108,13 +116,14 @@ public class Main4Activity extends AppCompatActivity {
         try {
             Long tsLong = System.currentTimeMillis()/1000;
             String ts = tsLong.toString();
-            writer = new CSVWriter(new FileWriter("/sdcard/"+f_name+ts+".csv"), ',');
+            writer = new CSVWriter(new FileWriter(csv+"/"+f_name+ts+".csv"), ',');
             writer.writeAll(data);
             writer.close();
             data.clear();
             Toast.makeText(getApplicationContext(),"CSV File Generated view it on Internal Storage ",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"error:"+e,Toast.LENGTH_LONG).show();
         }
 
     }

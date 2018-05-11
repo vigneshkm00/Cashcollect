@@ -1,6 +1,8 @@
 package com.example.nivetha_zuch508.cashcollect;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -77,8 +79,9 @@ public class updatecash extends AppCompatActivity {
                 amount1 = amount.getText().toString().trim();
                 if (!TextUtils.isEmpty(amount1)) {
 
-
-                databaseReference = FirebaseDatabase.getInstance().getReference("customer_details");
+                    SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+                    String admin = sharedPreferences.getString("acc_id","");
+                databaseReference = FirebaseDatabase.getInstance().getReference(admin).child("customer_details");
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -117,6 +120,8 @@ public class updatecash extends AppCompatActivity {
             //getting a unique id using push().getKey() method
             //it will create a unique id and we will use it as the Primary Key for our Artist
             // String id = databaseArtists.push().getKey();
+         SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+         String admin = sharedPreferences.getString("acc_id","");
 
             //creating an Artist Object
           Long tsLong = System.currentTimeMillis()/1000;
@@ -129,7 +134,7 @@ public class updatecash extends AppCompatActivity {
            // String month1= Integer.toString(month);
             String month1 =c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
             billupdate artist = new billupdate(mobno,amount1,year1,status,paid,month1,ts);
-            databaseref = FirebaseDatabase.getInstance().getReference("customer_bill").child(mobno);
+            databaseref = FirebaseDatabase.getInstance().getReference(admin).child("customer_bill").child(mobno);
             //Saving the Artist
          String tim = ts+month1;
             databaseref.child(year1).child(tim).setValue(artist);
