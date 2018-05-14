@@ -3,6 +3,7 @@ package com.example.nivetha_zuch508.cashcollect;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import static java.lang.System.exit;
+
 public class Main2Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 EditText name,mobileno,address1,address2,city,dob;
 Spinner state;
@@ -47,8 +50,10 @@ DatabaseReference databasecust;
         address2 = (EditText) findViewById(R.id.editText3);
         city = (EditText) findViewById(R.id.editText5);
         dob = (EditText) findViewById(R.id.editText7);
+        ImageButton ibtn = (ImageButton) findViewById(R.id.imageButton);
         state = (Spinner) findViewById(R.id.spinner);
-        dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        city.setEnabled(false);
+        mobileno.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                     DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference(admin).child("customer_details");
@@ -64,6 +69,7 @@ DatabaseReference databasecust;
                                   TextView tv = (TextView) findViewById(R.id.alert);
                                   tv.setText("*Mobile no already exist");
                                   add.setEnabled(false);
+                                 break;
                               }
                               else {
                                   add.setEnabled(true);
@@ -78,7 +84,7 @@ DatabaseReference databasecust;
 
                        }
                    });
-                    add.setEnabled(false);
+
 
 
 
@@ -91,7 +97,7 @@ DatabaseReference databasecust;
                 addCust();
             }
         });
-        ImageButton ibtn = (ImageButton) findViewById(R.id.imageButton);
+
         ibtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +138,10 @@ DatabaseReference databasecust;
 
             //displaying a success toast
             Toast.makeText(this, "Customer added", Toast.LENGTH_LONG).show();
+            Intent j = new Intent(Main2Activity.this, homepage.class);
+            // sendSms();
+            setResult(1, j);
+            finish();
         } else {
             //if the value is not given displaying a toast
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show();
@@ -147,6 +157,7 @@ DatabaseReference databasecust;
         String dob2 = DateFormat.getDateInstance().format(c.getTime());
 
         dob.setText(dob2);
+        dob.setEnabled(false);
     }
 
 }

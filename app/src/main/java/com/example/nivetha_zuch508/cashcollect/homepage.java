@@ -1,6 +1,8 @@
 package com.example.nivetha_zuch508.cashcollect;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +41,8 @@ public class homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        final String admin = sharedPreferences.getString("acc_id","");
        /* ed2 = (EditText) findViewById(R.id.editText2);
         ed3 = (EditText)findViewById(R.id.amounttext);
         ed4 = (EditText) findViewById(R.id.editText4);
@@ -81,21 +86,14 @@ public class homepage extends AppCompatActivity {
                 }
             }
         });*/
-       Button b6 = (Button) findViewById(R.id.logoutbtn);
-       b6.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent i = new Intent(homepage.this,LoginActivity.class);
-               startActivity(i);
-
-           }
-       });
+        TextView t=(TextView) findViewById(R.id.welsome);
+        t.setText("Welcome "+admin+".!");
         Button b2 = (Button)findViewById(R.id.button4);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(homepage.this,Main2Activity.class);
-                startActivity(i);
+                startActivityForResult(i,1);
 
             }
         });
@@ -127,4 +125,20 @@ public class homepage extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Menu_logout:
+                Intent i = new Intent(homepage.this,LoginActivity.class);
+                startActivity(i);
+                break;
+        }
+        return true;
+    }
 }

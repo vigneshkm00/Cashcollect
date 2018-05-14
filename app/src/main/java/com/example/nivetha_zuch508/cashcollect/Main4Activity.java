@@ -2,11 +2,15 @@ package com.example.nivetha_zuch508.cashcollect;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +28,7 @@ import java.util.List;
 public class Main4Activity extends AppCompatActivity {
     List<String[]> data = new ArrayList<String[]>();
     EditText ed;
+    Spinner spn1,spn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +72,9 @@ public class Main4Activity extends AppCompatActivity {
 
             }
         });
+        spn1 = (Spinner) findViewById(R.id.yearspin);
+        spn2 = (Spinner) findViewById(R.id.monthspin);
+
         Button b6 = (Button) findViewById(R.id.custbill);
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +86,7 @@ public class Main4Activity extends AppCompatActivity {
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        int flag=0;
 
                         for (DataSnapshot billSnapshot : dataSnapshot.getChildren()) {
                             for (DataSnapshot billSnapshot1 : billSnapshot.getChildren())
@@ -90,11 +99,30 @@ public class Main4Activity extends AppCompatActivity {
                                 String amount = bill_update.getAmount().toString();
                                 String paid = bill_update.getPaid().toString();
                                 String status = bill_update.getStatus().toString();
-                                data.add(new String[]{mobno,month,year,amount,paid,status});
+                                    String year_val=spn1.getSelectedItem().toString();
+                                    String month_val=spn2.getSelectedItem().toString();
+
+                                if(year_val.equals(year)&&month_val.equals(month))
+                                {
+                                    data.add(new String[]{mobno,month,year,amount,paid,status});
+                                    flag=1;
+
+                                }
+                              //  data.add(new String[]{mobno,month,year,amount,paid,status});
                             }}
                             //  Toast.makeText(getApplicationContext(),"data"+mobno,Toast.LENGTH_LONG).show();
                         }
-                        createcsv("bill_report");
+                        if(flag==1) {
+                            createcsv("bill_report");
+                        }
+                        else
+                        {
+                            ConstraintLayout cns = (ConstraintLayout) findViewById(R.id.csv_layout);
+                            Snackbar snackbar = Snackbar
+                                    .make(cns, "No Bills Found", Snackbar.LENGTH_LONG);
+
+                            snackbar.show();
+                        }
                         //Toast.makeText(getApplicationContext(),"Bill updated",Toast.LENGTH_LONG).show();
                     }
 

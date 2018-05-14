@@ -19,11 +19,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 
 public class Amount extends AppCompatActivity {
     EditText amn;
     Button btn;
     String amount,paid,key,status,month,year,ts,amn1;
+    String y,m;
     DatabaseReference databaseref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,9 @@ public class Amount extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
                     String admin = sharedPreferences.getString("acc_id","");
                     databaseref = FirebaseDatabase.getInstance().getReference(admin).child("customer_bill");
-                    databaseref.child(key).child(year).child(ts+month).setValue(artist);
+                    y = getIntent().getStringExtra("year");
+                    m = getIntent().getStringExtra("timest");
+                    databaseref.child(key).child(year).child(y+m+month).setValue(artist);
                     Toast.makeText(getApplicationContext(), "Paid", Toast.LENGTH_LONG).show();
                     Intent j = new Intent(Amount.this, bill_list.class);
                    // sendSms();

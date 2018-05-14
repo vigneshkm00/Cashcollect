@@ -13,6 +13,7 @@ public class Admin_det {
         return access;
     }
 
+
     public Admin_det(String name, long password, int access){
         this.name = name;
         this.password = password;
