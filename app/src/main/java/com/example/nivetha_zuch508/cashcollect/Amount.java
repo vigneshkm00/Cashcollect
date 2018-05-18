@@ -104,8 +104,8 @@ public class Amount extends AppCompatActivity {
             int e = c.get(Calendar.MINUTE);
             int f = c.get(Calendar.SECOND);
             String g = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-            String apiKey = "apikey=" + "coM+EvHnSM8-NmPxMWt9BHMKS8OxatxNDr2WFFbczE";
-            String message = "&message=" + "Recharge of Rs."+amn1+" for "+month+" is successful on "+b+g+","+a+" "+d+":"+e+":"+f+" towards your cable connection with customer ID:"+key+".";
+            String apiKey = "apikey=" + "mPIkes096PU-uLrqn7LefDmrwAMG3R0th6HdnEJajq";
+            String message = "&message=" + "Recharge of Rs."+amn1+" for the Month:"+month+" "+year+" is successful on "+b+g+","+a+" "+d+":"+e+":"+f+" towards your cable connection with customer ID:"+key+".";
             String sender = "&sender=" + "TXTLCL";
             String numbers = "&numbers=" + "91"+key;
 
