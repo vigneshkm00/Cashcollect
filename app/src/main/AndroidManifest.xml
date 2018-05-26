@@ -28,7 +28,8 @@
         <activity
             android:name=".updatecash"
             android:parentActivityName=".homepage" />
-        <activity android:name=".Amount" />
+        <activity android:name=".Amount"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Main3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

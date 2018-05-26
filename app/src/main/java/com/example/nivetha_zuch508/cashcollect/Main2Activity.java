@@ -33,6 +33,7 @@ import static java.lang.System.exit;
 public class Main2Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 EditText name,mobileno,address1,address2,city,dob;
 Spinner state;
+//TextView textv = (TextView) findViewById(R.id.textView17);
 DatabaseReference databasecust;
 
     @Override
@@ -40,7 +41,6 @@ DatabaseReference databasecust;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         final Button add = (Button) findViewById(R.id.button3);
-
         SharedPreferences sharedPreferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
         final String admin = sharedPreferences.getString("acc_id","");
         databasecust = FirebaseDatabase.getInstance().getReference(admin);
@@ -53,6 +53,7 @@ DatabaseReference databasecust;
         ImageButton ibtn = (ImageButton) findViewById(R.id.imageButton);
         state = (Spinner) findViewById(R.id.spinner);
         city.setEnabled(false);
+        dob.setEnabled(false);
         mobileno.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -155,7 +156,7 @@ DatabaseReference databasecust;
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DATE,dayOfMonth);
         String dob2 = DateFormat.getDateInstance().format(c.getTime());
-
+    //    textv.setText(dob2);
         dob.setText(dob2);
         dob.setEnabled(false);
     }
