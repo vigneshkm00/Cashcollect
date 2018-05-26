@@ -2,7 +2,7 @@ package com.example.nivetha_zuch508.cashcollect;
 
 public class Admin_det {
     String name;
-    long password;
+    String password;
     int access;
     public Admin_det(){
 
@@ -14,7 +14,7 @@ public class Admin_det {
     }
 
 
-    public Admin_det(String name, long password, int access){
+    public Admin_det(String name, String password, int access){
         this.name = name;
         this.password = password;
         this.access = access;
@@ -23,7 +23,7 @@ public class Admin_det {
         return name;
     }
 
-    public long getPassword() {
+    public String getPassword() {
         return password;
     }
 }

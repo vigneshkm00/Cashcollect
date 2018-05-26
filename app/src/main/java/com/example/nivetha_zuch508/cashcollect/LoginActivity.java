@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                             try{
                                 Admin_det admin_det=dataSnapshot.getValue(Admin_det.class);
                                 String na = admin_det.getName().toString();
-                                String pa = Long.toString(admin_det.getPassword());
+                                String pa = admin_det.getPassword().toString();
                                 int acc = admin_det.getAccess();
                                 if(email1.equals(na)&&pass.equals(pa)&&acc==1)
                                 {
