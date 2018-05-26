@@ -77,7 +77,7 @@ public class Amount extends AppCompatActivity {
                     int e = c.get(Calendar.MINUTE);
                     int f = c.get(Calendar.SECOND);
                     String g = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-                    String message = "&message=" + "Recharge of Rs."+amn1+" for "+month+" is successful on "+b+g+","+a+" "+d+":"+e+":"+f+" towards your cable connection with customer ID:"+key+".";
+                    String message = "&message=" + "Recharge of Rs."+amn1+" for the Month:"+month+" "+year+" is successful on "+b+g+","+a+" "+d+":"+e+":"+f+" towards your cable connection with customer ID:"+key+".";
                     Toast.makeText(getApplicationContext(), "Paid:"+message, Toast.LENGTH_LONG).show();
                     y = sendSms();
                     Toast.makeText(getApplicationContext(), "Sms Sent:"+y, Toast.LENGTH_LONG).show();
