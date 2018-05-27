@@ -70,7 +70,7 @@ List<billupdate>billupdateList;
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
                             {
-                                Cust cust = dataSnapshot1.getValue(Cust.class);
+                                final Cust cust = dataSnapshot1.getValue(Cust.class);
                                 ed= (EditText) findViewById(R.id.editText6);
                                 key = ed.getText().toString();
                                 if(key.equals(cust.getCustmo().toString()))
@@ -100,11 +100,16 @@ List<billupdate>billupdateList;
 
                                             }
                                             if (flag == 1) {
-                                                ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
+                                                CardView cusde = (CardView) findViewById(R.id.cardView4);
+                                                 ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
                                                 pb.setVisibility(View.INVISIBLE);
+                                                cusde.setVisibility(View.VISIBLE);
+                                                TextView add = (TextView) findViewById(R.id.addressbar);
+                                                add.setText(cust.getCustname().toString()+"\n"+cust.getAddress().toString()+"\n"+cust.getCity().toString()+","+cust.getState().toString());
                                                 setVisi();
                                             }
                                             if (flag == 0&&flag1==1) {
+                                                CardView cusde = (CardView) findViewById(R.id.cardView4);
                                                 ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
                                                 pb.setVisibility(View.INVISIBLE);
                                                 t7 = (TextView) findViewById(R.id.textView14);
@@ -115,7 +120,11 @@ List<billupdate>billupdateList;
                                                 t7.setVisibility(View.VISIBLE);
                                                 ca1.setVisibility(View.INVISIBLE);
                                                 ca2.setVisibility(View.INVISIBLE);
-  //                                             Toast.makeText(getApplicationContext(), "No Bills Found", Toast.LENGTH_LONG).show();
+                                                cusde.setVisibility(View.VISIBLE);
+                                                TextView add = (TextView) findViewById(R.id.addressbar);
+                                                add.setText(cust.getCustname().toString()+"\n"+cust.getAddress().toString()+"\n"+cust.getCity().toString()+","+cust.getState().toString());
+
+                                                //                                             Toast.makeText(getApplicationContext(), "No Bills Found", Toast.LENGTH_LONG).show();
 
                                             }
 
